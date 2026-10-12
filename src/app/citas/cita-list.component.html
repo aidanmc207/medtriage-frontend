@@ -1,0 +1,100 @@
+<main class="dashboard">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">MEDTRIAGE / GESTIÓN CLÍNICA</p>
+      <h1>Citas médicas</h1>
+      <p class="subtitle">Consulta y organiza las citas registradas.</p>
+    </div>
+    <button class="refresh-button" type="button" (click)="cargarCitas()" [disabled]="cargando()">
+      <span aria-hidden="true">↻</span>
+      Actualizar
+    </button>
+  </header>
+
+  <section class="summary-card" aria-label="Resumen de citas">
+    <a class="new-appointment" routerLink="/nueva-cita">+ Nueva cita</a>
+    <div>
+      <p class="summary-label">Citas registradas</p>
+      <p class="summary-value">{{ citas().length }}</p>
+    </div>
+    <p class="summary-note">Total en el sistema</p>
+  </section>
+
+  <section class="appointments" aria-labelledby="appointments-title">
+    <div class="section-header">
+      <div>
+        <h2 id="appointments-title">Listado de citas</h2>
+        <p class="section-description">Filtra las citas según su nivel de prioridad.</p>
+      </div>
+      <span class="result-count">{{ citasFiltradas().length }} resultados</span>
+    </div>
+
+    <div class="filters" aria-label="Filtrar citas por prioridad">
+      @for (prioridad of prioridades; track prioridad) {
+        <button
+          class="filter-button"
+          [class.active]="filtroPrioridad() === prioridad"
+          [attr.aria-pressed]="filtroPrioridad() === prioridad"
+          type="button"
+          (click)="filtroPrioridad.set(prioridad)"
+        >
+          {{ prioridad }}
+        </button>
+      }
+    </div>
+
+    @if (cargando()) {
+      <div class="message-card" role="status">Cargando citas...</div>
+    } @else if (error()) {
+      <div class="message-card error-message" role="alert">
+        <p>{{ error() }}</p>
+        <button class="retry-button" type="button" (click)="cargarCitas()">Reintentar</button>
+      </div>
+    } @else if (citasFiltradas().length === 0) {
+      <div class="message-card empty-message">
+        <span class="empty-icon" aria-hidden="true">○</span>
+        <h3>No hay citas para mostrar</h3>
+        <p>
+          @if (filtroPrioridad() === 'TODAS') {
+            Aún no hay citas registradas.
+          } @else {
+            No se encontraron citas con prioridad {{ filtroPrioridad() }}.
+          }
+        </p>
+      </div>
+    } @else {
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Paciente</th>
+              <th scope="col">Doctor</th>
+              <th scope="col">Fecha y hora</th>
+              <th scope="col">Prioridad</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (cita of citasFiltradas(); track cita.id) {
+              <tr>
+                <td class="code-cell">{{ cita.codigoCita }}</td>
+                <td>{{ cita.paciente?.nombre ?? 'Paciente #' + cita.pacienteId }}</td>
+                <td>{{ cita.doctor?.nombre ?? 'Doctor #' + cita.doctorId }}</td>
+                <td>{{ cita.fechaCita | date: 'dd/MM/yyyy, HH:mm' }}</td>
+                <td>
+                  <span class="priority-badge" [class]="'priority-badge priority-' + cita.nivelPrioridad.toLowerCase()">
+                    {{ cita.nivelPrioridad }}
+                  </span>
+                </td>
+                <td>
+                  <span class="status-badge">{{ cita.estado }}</span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</main>

@@ -1,0 +1,78 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 24px;
+  color: #333;
+  background: #f4f4f4;
+}
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+form {
+  display: grid;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+}
+
+input,
+select,
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+button {
+  padding: 8px 14px;
+  border: 1px solid #148b83;
+  border-radius: 4px;
+  color: white;
+  background: #148b83;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #a00;
+}
+
+@media (max-width: 600px) {
+  :host {
+    padding: 16px;
+  }
+}
+.cancel-button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  color: #333;
+  text-decoration: none;
+}

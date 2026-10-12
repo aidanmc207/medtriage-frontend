@@ -1,0 +1,157 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 24px;
+  color: #333;
+  background: #f4f4f4;
+}
+
+.dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-header,
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.eyebrow,
+.subtitle,
+.section-description,
+.summary-label,
+.summary-note,
+.result-count {
+  color: #666;
+}
+
+.refresh-button,
+.retry-button,
+.filter-button,
+.new-appointment {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.new-appointment {
+  color: #333;
+  text-decoration: none;
+}
+
+.summary-card,
+.appointments,
+.message-card {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.summary-value {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.summary-note {
+  margin: 0 0 0 auto;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.filter-button.active {
+  color: white;
+  border-color: #148b83;
+  background: #148b83;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #f4f4f4;
+}
+
+.priority-badge,
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #eee;
+}
+
+.priority-alta {
+  color: #a00;
+  background: #fee;
+}
+
+.priority-media {
+  color: #850;
+  background: #fff4d6;
+}
+
+.priority-baja {
+  color: #176b3a;
+  background: #e7f5eb;
+}
+
+.message-card {
+  text-align: center;
+}
+
+.error-message {
+  color: #a00;
+}
+
+.retry-button {
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  :host {
+    padding: 16px;
+  }
+
+  .page-header,
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
